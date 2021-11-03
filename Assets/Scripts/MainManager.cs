@@ -26,9 +26,9 @@ public class MainManager : MonoBehaviour
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
 
-        if (GameManager.Instance.highScore > 0)
+        if (GameManager.Instance.highPlayer != null)
         {
-            HighScoreText.text = "High Score; " + GameManager.Instance.playerName + ": " + GameManager.Instance.highScore;
+            HighScoreText.text = "High Score; " + GameManager.Instance.highPlayer + ": " + GameManager.Instance.highScore;
         }
         
         int[] pointCountArray = new [] {1,1,2,2,5,5};
@@ -82,8 +82,10 @@ public class MainManager : MonoBehaviour
         int currentHigh = GameManager.Instance.highScore;
         if(currentHigh < m_Points)
         {
-            GameManager.Instance.setHighScore(m_Points);
+            GameManager.Instance.setHighScore(m_Points, GameManager.Instance.playerName);
             HighScoreText.text = "High Score; " + GameManager.Instance.playerName + ": " + m_Points;
         }
+        GameManager.Instance.SaveGameData();
+
     }
 }
